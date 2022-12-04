@@ -497,4 +497,23 @@ function functional.find_match(t, f)
 	return nil
 end
 
+--returns the element that are common between two (or more) tables
+function functional.intersection(t1, ...)
+	local ret = {}
+	for _,v in pairs(t1) do
+		if not functional.contains(ret, v) then
+			local c = true
+			for _,t2 in pairs({...}) do
+				if not functional.contains(t2, v) then
+					c = false
+				end
+			end
+			if c then
+				table.insert(ret, v)
+			end
+		end
+	end
+	return ret
+end
+
 return functional
